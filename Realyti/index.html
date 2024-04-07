@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realyti</title>
+    <style>
+        /* Reset CSS */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: slide-in 0.5s ease-out;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            animation: fade-in 1s ease-out;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .navigation-btn {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 0.25rem;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+
+        .navigation-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .search-box {
+            text-align: center;
+            animation: slide-in 0.5s ease-out;
+        }
+
+        .search-input {
+            border: 2px solid #007BFF;
+            border-radius: 0.25rem;
+            padding: 0.5rem;
+            font-size: 1rem;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .search-button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 0.25rem;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+
+        .flash {
+            color: yellow;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1rem;
+            animation: flash-animation 4s infinite alternate;
+        }
+
+        @keyframes flash-animation {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .article {
+            background-color: #fff;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: slide-in 0.5s ease-out;
+            position: relative; /* Added for tooltip positioning */
+        }
+
+        .article-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+        }
+
+        .article-title:hover {
+            color: blue;
+        }
+
+        .article-summary {
+            color: #000;
+            margin-top: 0.5rem;
+        }
+
+        .article-image {
+            width: 100%;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tooltip {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            bottom: 0;
+            left: 0;
+            display: none;
+        }
+
+        .article:hover .tooltip {
+            display: block;
+        }
+
+        .chat-button {
+            text-align: center;
+            margin-top: 2rem;
+            animation: slide-in 0.5s ease-out;
+        }
+
+        .chat-button a {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 0.25rem;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+
+        .chat-button a:hover {
+            background-color: #0056b3;
+        }
+
+        .ai-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 2rem;
+            animation: slide-in 0.5s ease-out;
+        }
+
+        .button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 0.25rem;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        @keyframes slide-in {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="text-3xl font-semibold">Realyti</h1>
+    </div>
+
+    <div class="container">
+        <div class="navigation">
+            <a href="{{ url_for('index') }}" class="navigation-btn">Home</a>
+            <a href="{{ url_for('go_back') }}" class="navigation-btn">Back</a>
+        </div>
+
+        <div class="search-box">
+            <form method="POST" action="{{ url_for('index') }}"> <!-- Corrected action URL -->
+                <input type="text" id="query" name="query" class="search-input" placeholder="Search for news...">
+                <button type="submit" class="search-button">Search</button>
+            </form>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="flash">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <h2 class="text-2xl font-semibold mb-4">Top Article About India</h2>
+        <div class="top-article">
+            {% if top_article_about_india %}
+            <div class="article">
+                <h3 class="article-title"><a href="{{ top_article_about_india.link }}" target="_blank">{{ top_article_about_india.title }}</a></h3>
+                <img src="{{ top_article_about_india.image_url }}" alt="{{ top_article_about_india.title }}" class="article-image">
+                <p class="article-summary">{{ top_article_about_india.summary }}</p>
+                <div class="tooltip">Real or Fake: {% if top_article_about_india.is_real %} Real {% else %} Fake {% endif %}</div>
+            </div>
+            {% else %}
+            <p>No top article about India found.</p>
+            {% endif %}
+        </div>
+
+        <h2 class="text-2xl font-semibold mb-4">Latest Articles</h2>
+        <div class="latest-articles">
+            {% for article in latest_articles %}
+            <div class="article">
+                <h3 class="article-title"><a href="{{ article.link }}" target="_blank">{{ article.title }}</a></h3>
+                <img src="{{ article.image_url }}" alt="{{ article.title }}" class="article-image">
+                <p class="article-summary">{{ article.summary }}</p>
+                <div class="tooltip">Real or Fake: {% if article.is_real %} Real {% else %} Fake {% endif %}</div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Top Headlines</h2>
+        <div class="top-headlines">
+            {% for article in top_headlines %}
+            <div class="article">
+                <h3 class="article-title"><a href="{{ article.link }}" target="_blank">{{ article.title }}</a></h3>
+                <img src="{{ article.image_url }}" alt="{{ article.title }}" class="article-image">
+                <p class="article-summary">{{ article.summary }}</p>
+                <div class="tooltip">Real or Fake: {% if article.is_real %} Real {% else %} Fake {% endif %}</div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="chat-button">
+            <a href="https://chat.openai.com/" target="_blank" class="navigation-btn">Chat with ChatGPT</a>
+        </div>
+
+        <div class="ai-links">
+            <a href="https://openai.com" target="_blank" class="button">OpenAI</a>
+            <a href="https://deepmind.com" target="_blank" class="button">DeepMind</a>
+            <a href="https://www.ibm.com/watson" target="_blank" class="button">IBM Watson</a>
+            <a href="https://research.google/teams/brain" target="_blank" class="button">Google Brain</a>
+            <a href="https://ai.facebook.com" target="_blank" class="button">Facebook AI Research</a>
+            <a href="https://www.microsoft.com/en-us/research/research-area/artificial-intelligence/" target="_blank" class="button">Microsoft AI</a>
+            <a href="https://www.nvidia.com/en-us/ai-platform/" target="_blank" class="button">NVIDIA AI</a>
+            <a href="https://www.apple.com/machine-learning/" target="_blank" class="button">Apple Machine Learning</a>
+            <a href="https://ai.google/research/teams/brain/" target="_blank" class="button">Google Research</a>
+            <a href="https://www.amazon.science/research-areas/artificial-intelligence" target="_blank" class="button">Amazon AI</a>
+            <a href="https://www.bloomberg.com/professional/solution/bloomberg-brain/" target="_blank" class="button">Bloomberg Brain</a>
+            <a href="https://deepai.org" target="_blank" class="button">DeepAI</a>
+            <a href="https://www.openphilanthropy.org/focus/global-catastrophic-risks/potential-risks-advanced-artificial-intelligence" target="_blank" class="button">AI Safety</a>
+            <a href="https://ai.google" target="_blank" class="button">Google AI</a>
+            <a href="https://www.salesforce.com/products/einstein/overview/" target="_blank" class="button">Salesforce Einstein</a>
+            <a href="https://ai.facebook.com" target="_blank" class="button">Facebook AI</a>
+            <a href="https://www.didi-labs.com" target="_blank" class="button">Didi Labs</a>
+            <a href="https://www.csail.mit.edu/research?field_research_areas_tid=1" target="_blank" class="button">MIT CSAIL</a>
+        </div>
+    </div>
+</body>
+</html>
