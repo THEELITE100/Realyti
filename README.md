@@ -22,7 +22,7 @@ We have used four programming lanuages in this code:
 4.CSS
 And inside these we have used many modules and libraries like flask, beautifulsoup,feedparser,ender_template_string,etc.
 Also we have used methods and functions.
-.
+Also there were two files which have been not been implemented in the main project due to lack of time, but we have still uploded the files in the Repo.
 .
 .
 .
